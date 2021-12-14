@@ -1,0 +1,17 @@
+## INSTALLING JAEGER OPERATOR ####
+ kubectl create namespace observability # <1>
+ kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+#<2>
+kubectl create -n dx -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/service_account.yaml
+kubectl create -n dx -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/role.yaml
+kubectl create -n dx -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/role_binding.yaml
+Change WATCH_NAMESPACE to your name space in this case dx
+kubectl create -n dx -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/operator.yaml
+I did this from local file
+chmod 777
+kubectl create -n dx -f operator.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/cluster_role.yaml
+#Change namespace here too
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaegeroperator/master/deploy/cluster_role_binding.yaml
+kubectl create -f cluster_role_binding.yaml
+kubectl get deployment jaeger-operator -n dx
